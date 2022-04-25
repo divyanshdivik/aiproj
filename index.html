@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Credit Card Fraud Detection Web App</title> <!--
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet"/>
+<link
+rel="stylesheet"
+type="text/css"
+href="/stylesheets/styles.css"
+/> 
+
+<style>
+    .speech {
+      border: 1px solid #ddd;
+      width: 300px;
+      padding: 0;
+      margin: 0;
+    }
+    .speech input {
+      border: 0;
+      width: 240px;
+      display: inline-block;
+      height: 30px;
+    }
+    .speech img {
+      float: right;
+      width: 40px;
+    }
+  </style>
+
+</head>
+<body> 
+    <header>
+        <div class="container"> <h1>
+            <p style="text-align: center">Credit Card Fraud Detection</p>
+        </h1>
+            </div>
+        </header>
+            <div class="ml-container">
+            <p style="text-align: center">
+            <!--Enter the 30 feature values in the below cell(in order):-->
+            </p>
+            <form action="result.html" method="POST"> <!-- <input type="text" name="comment"/> -->
+            <div class="justify">
+            <textarea name="message" rows="8" cols="50"></textarea>
+        </div>
+            <br/>
+            <input type="submit" class="btn-info" value="Predict" />
+
+        </form>
+            </div> 
+
+            <div>
+                <form id="labnol" method="get" action="result.html">
+                <div class="speech">
+                  <input type="text" name="q" id="transcript" placeholder="Speak" />
+                  <img onclick="startDictation()" src="/assets/mic.png" />
+                </div>
+              </form>
+              
+            </div>
+
+            <script>
+                function startDictation() {
+                  if (window.hasOwnProperty('webkitSpeechRecognition')) {
+                    var recognition = new webkitSpeechRecognition();
+              
+                    recognition.continuous = false;
+                    recognition.interimResults = false;
+              
+                    recognition.lang = 'en-US';
+                    recognition.start();
+              
+                    recognition.onresult = function (e) {
+                      document.getElementById('transcript').value = e.results[0][0].transcript;
+                      recognition.stop();
+                      document.getElementById('labnol').submit();
+                    };
+              
+                    recognition.onerror = function (e) {
+                      recognition.stop();
+                    };
+                  }
+                }
+              </script>
+        </body>
+            </html>
